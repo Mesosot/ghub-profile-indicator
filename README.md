@@ -4,7 +4,9 @@ A small, movable, always-on-top Windows overlay that reads the **effective profi
 
 ## Download
 
-Open this repository’s **Releases** section and download `GHubIndicator-Windows-x64.zip`. Extract it before running the EXE. The portable download includes the app and license notices. Source code is available in this repository.
+**[Download GHubIndicator for Windows x64](https://github.com/Mesosot/ghub-profile-indicator/releases/download/v1.0.0/GHubIndicator-Windows-x64.zip)** · [Release notes](https://github.com/Mesosot/ghub-profile-indicator/releases/tag/v1.0.0)
+
+Extract the ZIP and double-click `GHubIndicator.exe`. The portable download includes the app and license notices. No Python installation is required. Source code is available in this repository.
 
 ## Run the Windows app
 
