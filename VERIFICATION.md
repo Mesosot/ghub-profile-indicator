@@ -1,5 +1,14 @@
 # Verification
 
+## Release 1.0.1 checks
+
+- 29 automated tests cover live-response parsing, read-only catalog access, startup registration in isolated test keys, island timers, caption updates, glass alpha rendering, drag/animation races, edge placement and negative-coordinate monitors.
+- Native Windows checks verified the five-second preview, stable GDI handle counts, and return to the last dragged anchor through repeated open/close cycles.
+- Manual hover/click timeout remains ten seconds; automatic profile-change previews remain five seconds.
+- The public product identity and Windows version resource are Logitech G HUB Profile Indicator 1.0.1.
+
+## Original release checks
+
 Tested on the current Windows 11 x64 PC, Python 3.12.10, G HUB agent **2026.7.1011216**.
 
 ## Passed

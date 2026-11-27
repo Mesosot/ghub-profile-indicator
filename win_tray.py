@@ -2,6 +2,7 @@
 import ctypes as c
 from ctypes import wintypes as w
 import threading
+from app_info import APP_NAME
 
 LRESULT = c.c_ssize_t
 WNDPROC = c.WINFUNCTYPE(LRESULT, w.HWND, w.UINT, w.WPARAM, w.LPARAM)
@@ -98,7 +99,7 @@ class Tray:
             self.data.hWnd, self.data.uID = self.hwnd, 1
             self.data.uFlags, self.data.uCallbackMessage = 7, 0x8001
             self.data.hIcon = self.user.LoadIconW(None, c.c_void_p(32516))
-            self.data.szTip = 'G HUB Profile Indicator'
+            self.data.szTip = APP_NAME
             if not self.shell.Shell_NotifyIconW(0, c.byref(self.data)):
                 raise OSError('Could not add notification-area icon')
             self.ready.set()

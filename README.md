@@ -1,10 +1,12 @@
-# G HUB Profile Indicator
+# Logitech G HUB Profile Indicator
 
 A small, movable, always-on-top Windows overlay that reads the **effective profile reported by the running G HUB agent**. It does not predict the profile from the foreground program, and it never switches profiles.
 
+The interface uses a liquid-glass-inspired dark finish: antialiased translucent edges, reflected highlights and soft shadows, with smooth damped expansion. This is a custom visual treatment with real alpha transparency; it does not capture the desktop or apply Apple's system material or live background blur.
+
 ## Download
 
-**[Download GHubIndicator for Windows x64](https://github.com/Mesosot/ghub-profile-indicator/releases/download/v1.0.0/GHubIndicator-Windows-x64.zip)** · [Release notes](https://github.com/Mesosot/ghub-profile-indicator/releases/tag/v1.0.0)
+**[Download Logitech G HUB Profile Indicator 1.0.1 for Windows x64](https://github.com/Mesosot/ghub-profile-indicator/releases/download/v1.0.1/Logitech-G-HUB-Profile-Indicator-Windows-x64.zip)** · [Changelog](CHANGELOG.md) · [Release notes](https://github.com/Mesosot/ghub-profile-indicator/releases/tag/v1.0.1)
 
 Extract the ZIP and double-click `GHubIndicator.exe`. The portable download includes the app and license notices. No Python installation is required. Source code is available in this repository.
 
@@ -12,13 +14,14 @@ Extract the ZIP and double-click `GHubIndicator.exe`. The portable download incl
 
 1. Keep Logitech G HUB running in the background. Its main window can be minimized or closed to the tray.
 2. Double-click `GHubIndicator.exe` in the portable download. No Python, administrator rights, or installation is required. This build is unsigned.
-3. Drag the overlay to a convenient spot. Its position is saved automatically.
-4. Right-click anywhere on it, or click **⋯**, for notifications, the optional tray icon, connection details and Quit.
-5. Double-click the tray icon to hide/show the overlay. Notifications are off initially. Windows notification settings can suppress tray notifications. With the tray disabled, changes use a brief floating message instead.
+3. The indicator starts as a small rounded **G** circle with the live profile in a tiny caption underneath. Long captions use an ellipsis; hover or click to see the full name. A profile change opens an animated preview for **5 seconds**, then shrinks back. Each new change restarts the five-second preview. Hovering/clicking manually uses **10 seconds**. Timers pause while its menu is open, and a tray-hidden overlay stays hidden. Move the pointer away and back to reopen after automatic collapse, or click the circle.
+4. Drag the circle or expanded overlay to a convenient spot. Its compact position is saved independently of the animation, so opening and closing returns it to the last dragged location. Screens to the left of or above the primary monitor are supported.
+5. Right-click anywhere on it, or click **⋯** when expanded, for manual expand/collapse, notifications, the optional tray icon, startup, connection details and Quit.
+6. Double-click the tray icon to hide/show the overlay. Notifications are off initially. Windows notification settings can suppress tray notifications. With the tray disabled, changes use a brief floating message instead.
 
 The overlay polls once per second. Failed connections retry automatically, with a delay of up to five seconds. It shows **Profile unavailable** when live reads fail, rather than leaving an old profile displayed as current.
 
-To start with Windows, create a shortcut to the EXE in `%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`. Remove that shortcut to disable startup. The app does not register itself automatically.
+To start with Windows, open **⋯ → Start with Windows** and check the option. Uncheck it to stop automatic startup. It starts when your Windows account signs in, requires no administrator rights, and is off until you enable it. Keep the EXE in a permanent folder before enabling startup. If you move it later, turn this option off and on again from the new location. A manually created Startup-folder shortcut is separate; remove any old shortcut to avoid a second launch. Windows Task Manager can also disable startup independently of this checkbox.
 
 ## What it reads
 
@@ -56,13 +59,13 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe app.py
 ```
 
-Tkinter and SQLite are included in the standard Windows Python installer. The tray uses the Windows notification-area API directly, so no imaging or UI framework packages are needed.
+Tkinter and SQLite are included in the standard Windows Python installer. Pillow renders the antialiased glass artwork; Windows presents it using a per-pixel-alpha layered window. The tray uses the Windows notification-area API directly.
 
 Build the portable EXE with `build.ps1` or run:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install pyinstaller==6.22.3
-.\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean --onefile --windowed --name GHubIndicator app.py
+.\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean --onefile --windowed --name GHubIndicator --version-file version_info.txt app.py
 ```
 
 The result is `dist\GHubIndicator.exe`. A one-file bundle extracts its runtime to a temporary folder on launch. No additional Windows service is installed.
